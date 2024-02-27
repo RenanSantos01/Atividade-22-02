@@ -2,11 +2,13 @@ class Containvestimento{
     private String nometitular;
     private int numerodaconta;
     private double saldodaconta;
+    private double taxadejuros;
 
-Containvestimento(String nometitular, int numerodaconta, double saldodaconta){
+Containvestimento(String nometitular, int numerodaconta, double saldodaconta, double taxadejuros){
     this.nometitular = nometitular;
     this.numerodaconta = numerodaconta;
     this.saldodaconta = saldodaconta;
+    this.taxadejuros = taxadejuros;
 }
 
 public String getnometitular(){
@@ -21,6 +23,10 @@ public double getsaldodaconta(){
     return saldodaconta;
 }
 
+public double gettaxadejuros(){
+    return taxadejuros;
+}
+
 public void depositar(double valor){
     System.out.println("Depositar valor de: " + valor + "realizado");
     saldodaconta += valor;
@@ -33,6 +39,8 @@ public void sacar(double valor){
 
 public void adicionejuros(){
 
+double juros = saldodaconta *(taxadejuros/100);
+saldodaconta += juros;
 }
 
 @Override
@@ -40,9 +48,8 @@ public String toString(){
     return "Nome do titular: " + nometitular + "Numero da conta: " + numerodaconta + "Saldo da conta: " + saldodaconta + "\n";
 }
 
-public class App {
     public static void main(String[] args) throws Exception {
-        Containvestimento containvestimento = new Containvestimento("Renan", 8888888, 1000);
+        Containvestimento containvestimento = new Containvestimento("Renan", 8888888, 1000, 10.0);
         
         System.out.println(containvestimento.toString());
 
@@ -52,14 +59,14 @@ public class App {
         containvestimento.sacar(1000);
         System.out.println(containvestimento.toString());
 
-        
+        for(int i = 0; i < 5; i++){
+            containvestimento.adicionejuros();
+        }
+    
+        System.out.println("A taxa de eh: " + containvestimento.getsaldodaconta());
 
 
     }
-}
-
-
-
 }
 
 
